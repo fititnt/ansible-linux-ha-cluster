@@ -1,0 +1,13 @@
+---
+## This will isntall only for this project (Allows have multiple versions, or
+## even commit AP-ALB with your main repository)
+# ansible-galaxy install -r requirements.yml --roles-path roles/
+
+## This will install for multiple projects on your Ansible default roles path
+## like /home/YOURUSERNAME/.ansible/roles/ap-application-load-balancer
+# ansible-galaxy install -r requirements.yml
+
+- src: https://github.com/fititnt/ap-application-load-balancer
+  name: ap-application-load-balancer
+  # version: master
+  version: "v0.8.0-alpha"
