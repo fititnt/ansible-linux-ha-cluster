@@ -1,0 +1,18 @@
+---
+# FILE:            alb-ha-cluster-infra.yml
+# LICENSE:         Public Domain
+
+
+# ansible-playbook -i hosts.yml alb-ha-cluster-infra.yml
+
+- name: "alb-ha-cluster-infra: Playbook to manange the cluster underline infrastructure (not the apps)"
+  hosts: cluster_all_nodes
+  remote_user: root
+  vars:
+    # On this ap-alb-cluster-demo, we will use as example a single YAML file
+    # containing all variables at /hosts.yml
+    #
+    # Note that ansible allows other types of inventories
+
+  roles:
+    - ap-application-load-balancer
