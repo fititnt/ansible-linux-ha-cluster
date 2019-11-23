@@ -5,6 +5,11 @@
 
 # ansible-playbook -i hosts.yml alb-ha-cluster-infra.yml
 
+# To do some basic check for see if redis is listening, is possible to use
+#    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-delta.etica.ai 6379
+#    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-echo.etica.ai 6379
+#    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-foxtrot.etica.ai 6379
+
 - name: "alb-ha-cluster-infra: Playbook to manange the cluster underline infrastructure (not the apps)"
   # hosts: cluster_all_nodes
   hosts: none
@@ -21,24 +26,29 @@
 
 # We will use https://github.com/DavidWittman/ansible-redis to setup an Redis cluster
 
-- name: configure the master redis server
-  hosts: redis_leader
+- name: "alb-ha-cluster-infra + davidwittman.redis: setup master, slave and sentinel"
+  hosts: cluster_all_nodes
   roles:
     - davidwittman.redis
 
-- name: configure redis slaves
-  hosts: redis_follower
-  vars:
-    # - redis_slaveof: redis-master.example.com 6379
-  roles:
-    - davidwittman.redis
+#- name: configure the master redis server
+#  hosts: redis_leader
+#  roles:
+#    - davidwittman.redis
 
-- name: configure redis sentinel nodes
-  hosts: redis_sentinel
-  vars:
-    #- redis_sentinel_monitors:
-    #  - name: master01
-    #    host: redis-master.example.com
-    #    port: 6379
-  roles:
-    - davidwittman.redis
+#- name: configure redis slaves
+#  hosts: redis_follower
+#  vars:
+#    # - redis_slaveof: redis-master.example.com 6379
+#  roles:
+#    - davidwittman.redis
+
+#- name: configure redis sentinel nodes
+#  hosts: redis_sentinel
+#  vars:
+#    #- redis_sentinel_monitors:
+#    #  - name: master01
+#    #    host: redis-master.example.com
+#    #    port: 6379
+#  roles:
+#    - davidwittman.redis
