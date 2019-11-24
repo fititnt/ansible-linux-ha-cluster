@@ -46,7 +46,8 @@ ansible-galaxy install -r requirements.yml --roles-path roles/
 vim hosts.yml
 
 # This will run the playbooks
-ansible-playbook -i hosts.yml main.yml
+ansible-playbook -i hosts.yml main-alb-ha-cluster-infra.yml
+ansible-playbook -i hosts.yml main-alb-ha-cluster-apps.yml
 ```
 
 ## License

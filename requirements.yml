@@ -11,3 +11,6 @@
   name: ap-application-load-balancer
   # version: master
   version: "v0.8.0-alpha"
+
+# from galaxy
+- src: davidwittman.redis

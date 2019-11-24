@@ -1,9 +1,9 @@
 ---
-# FILE:            alb-ha-cluster-infra.yml
+# FILE:            main-alb-ha-cluster-infra.yml
 # LICENSE:         Public Domain
 
 
-# ansible-playbook -i hosts.yml alb-ha-cluster-infra.yml
+# ansible-playbook -i hosts.yml main-alb-ha-cluster-infra.yml
 
 # To do some basic check for see if redis is listening, is possible to use
 #    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-delta.etica.ai 6379
@@ -11,5 +11,5 @@
 #    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-foxtrot.etica.ai 6379
 
 
-- import_playbook: playbooks/alb-ha-cluster-infra-alb.yml
-- import_playbook: playbooks/alb-ha-cluster-infra-redis.yml
+- import_playbook: infra-alb.yml
+- import_playbook: infra-redis.yml
