@@ -50,6 +50,14 @@ ansible-playbook -i hosts.yml main-alb-ha-cluster-infra.yml
 ansible-playbook -i hosts.yml main-alb-ha-cluster-apps.yml
 ```
 
+### Extra information
+
+```bash
+
+# To hotfix error 'setup: [Errno 8] Exec format error: '/etc/ansible/facts.d/redis.fact'\n"'
+ansible -i hosts.yml cluster_all_nodes -a "chmod -x /etc/ansible/facts.d/redis.fact"
+```
+
 ## License
 [![Public Domain](https://i.creativecommons.org/p/zero/1.0/88x31.png)](UNLICENSE)
 

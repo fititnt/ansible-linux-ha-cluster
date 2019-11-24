@@ -5,6 +5,9 @@
 
 # ansible-playbook -i hosts.yml infra-redis.yml
 
+## To hotfix error 'setup: [Errno 8] Exec format error: '/etc/ansible/facts.d/redis.fact'\n"'
+# ansible -i hosts.yml cluster_all_nodes -a "chmod -x /etc/ansible/facts.d/redis.fact"
+
 # To do some basic check for see if redis is listening, is possible to use
 #    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-delta.etica.ai 6379
 #    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-echo.etica.ai 6379
