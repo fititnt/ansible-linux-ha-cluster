@@ -5,6 +5,7 @@
 
 # ansible-playbook -i hosts.yml infra-alb.yml
 # ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-haproxy"  # Apenas HAProxy
+# ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-ufw"  # Apenas UFW
 
 # To do some basic check for see if redis is listening, is possible to use
 #    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-delta.etica.ai 6379

@@ -19,6 +19,10 @@ Em caso de falha:
     ansible-playbook -i hosts main.yml --start-at-task="ALB/UFW clusterfuck-pre-check.yml"
     ansible-playbook -i hosts main.yml --start-at-task="Configure the kernel to keep connections alive when enabling the firewall"
 
+Debug
+
+    ansible-playbook ad-hoc/info/show-ufw-status.yml -i hosts.yml
+
 -->
 
 The **ap-alb-cluster-demo** does not have one ASCIInema demonstration... yet.
