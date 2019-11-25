@@ -54,6 +54,16 @@ ansible-playbook -i hosts.yml main-alb-ha-cluster-infra.yml
 ansible-playbook -i hosts.yml main-alb-ha-cluster-apps.yml
 ```
 
+### Ad Hoc ALB
+
+```bash
+
+ansible-playbook -i hosts.yml roles/ap-application-load-balancer/ad-hoc-alb/show-configurations-syntax-validation.yml
+
+# Tip: you may need replace 'roles/ap-application-load-balancer/' with something like '~/.ansible/roles/ap-application-load-balancer/'
+#      these ad-hoc-alb scripts are stored with the role
+```
+
 ### Extra information
 
 ```bash
