@@ -13,4 +13,7 @@
   version: "v0.8.0-alpha"
 
 # from galaxy
+- src: brianshumate.consul
+
+# from galaxy
 - src: davidwittman.redis

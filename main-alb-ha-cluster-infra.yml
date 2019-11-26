@@ -11,5 +11,6 @@
 #    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-foxtrot.etica.ai 6379
 
 
-- import_playbook: infra-alb.yml
+- import_playbook: infra-consul.yml
 - import_playbook: infra-redis.yml
+- import_playbook: infra-alb.yml

@@ -1,0 +1,13 @@
+---
+# FILE:            infra-consul.yml
+# LICENSE:         Public Domain
+
+
+# ansible-playbook -i hosts.yml infra-consul.yml
+
+# We will use https://github.com/DavidWittman/ansible-redis to setup an Redis cluster
+
+- name: "alb-ha-cluster-infra + brianshumate.consul: setup consul cluster"
+  hosts: consul_instances
+  roles:
+    - brianshumate.consul
