@@ -1,0 +1,26 @@
+---
+
+# ansible-playbook -i hosts.yml tasks-consul.yml
+
+# see https://docs.ansible.com/ansible/latest/search.html?q=consul&check_keywords=yes&area=default
+- name: "tasks"
+  hosts: consul_instances
+  pre_tasks:
+    - name: Install pip
+      apt:
+        name: python3-pip
+        state: present
+    - name: Install python-consul
+      pip:
+        name: python-consul
+        state: present
+
+  tasks:
+    - name: register nginx with an http check
+      consul:
+        service_name: openresty
+        service_port: 8080
+        interval: 60s
+        http: http://localhost:8080/openresty_status
+      tags:
+        - openresty
