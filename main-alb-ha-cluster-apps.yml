@@ -4,10 +4,14 @@
 
 # NOTE: NOT IMPLEMENTED YET (fititnt, 2019-11-23 10:44 BRT)
 
-# ansible-playbook -i hosts.yml alb-ha-cluster-apps.yml
+# ansible-playbook -i hosts.yml main-alb-ha-cluster-apps.yml --tags="alb-apps"
+# ansible-playbook -i hosts.yml main-alb-ha-cluster-apps.yml
+
+# To remove ALL deployed files on all hosts (they will need to be recreated before OpenResty restart next time!)
+# ansible -i hosts.yml cluster_all_nodes -a "rm -f /opt/alb/apps/*"
 
 - name: "alb-ha-cluster-infra: Playbook to manange the apps of already configured cluster"
-  hosts: all
+  hosts: cluster_all_nodes
   remote_user: root
   vars:
     # On this ap-alb-cluster-demo, we will use as example a single YAML file

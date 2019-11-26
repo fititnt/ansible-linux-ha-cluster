@@ -5,7 +5,9 @@
 
 # ansible-playbook -i hosts.yml infra-consul.yml
 
-# We will use https://github.com/DavidWittman/ansible-redis to setup an Redis cluster
+# To access the Consul UI localy, can setup an SSH Tunnel (on your local host) and then open http://localhost:8500
+# ssh -R 8500:localhost:8500 root@aguia-pescadora-delta.etica.ai -N
+
 
 - name: "alb-ha-cluster-infra + brianshumate.consul: setup consul cluster"
   hosts: consul_instances
