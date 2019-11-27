@@ -24,3 +24,12 @@
         http: http://localhost:8080/openresty_status
       tags:
         - openresty
+
+
+# luarocks install lua-resty-consul
+#   Installing https://luarocks.org/lua-resty-consul-0.2-0.src.rock
+#   lua-resty-consul 0.2-0 is now installed in /usr/local (license: MIT)
+# cd /usr/local/openresty/lualib/resty
+
+# opm get hamishforbes/lua-resty-consul
+# cd /usr/local/openresty/site/lualib/resty

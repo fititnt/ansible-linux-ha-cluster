@@ -11,7 +11,8 @@
 # ansible -i hosts.yml cluster_all_nodes -a "rm -f /opt/alb/apps/*"
 
 - name: "alb-ha-cluster-infra: Playbook to manange the apps of already configured cluster"
-  hosts: cluster_all_nodes
+  # hosts: cluster_all_nodes
+  hosts: delta
   remote_user: root
   vars:
     # On this ap-alb-cluster-demo, we will use as example a single YAML file
