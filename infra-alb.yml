@@ -5,6 +5,7 @@
 
 # ansible-playbook -i hosts.yml infra-alb.yml
 # ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-haproxy"  # Apenas HAProxy
+# ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-openresty,alb-apps" --extra-vars "alb_forceredeploy=yes"
 # ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-ufw" --extra-vars "alb_forceredeploy=yes" # Apenas UFW
 
 # To do some basic check for see if redis is listening, is possible to use
@@ -14,6 +15,7 @@
 
 - name: "alb-ha-cluster-infra: Playbook to manange the cluster underline infrastructure (not the apps)"
   hosts: cluster_all_nodes
+  # hosts: delta
   remote_user: root
   vars:
     # On this ap-alb-cluster-demo, we will use as example a single YAML file
