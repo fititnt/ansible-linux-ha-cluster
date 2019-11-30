@@ -8,6 +8,14 @@
 # To access the Consul UI localy, can setup an SSH Tunnel (on your local host) and then open http://localhost:8500
 # ssh -R 8500:localhost:8500 root@aguia-pescadora-delta.etica.ai -N
 
+# In one run, after intentional node fail tesr (I deleted Delta and started from zero)
+# the consul from delta did not recover without intervention, and had do execute
+#    root@aguia-pescadora-delta:# rm /var/consul/serf/local.keyring
+# @see https://github.com/hashicorp/consul/issues/719#issuecomment-520129203
+# @see https://github.com/solarkennedy/puppet-consul/issues/256
+# @see https://github.com/hashicorp/consul/issues/719
+# @see https://www.consul.io/docs/commands/keyring.html
+
 - name: "alb-ha-cluster-infra + brianshumate.consul: setup consul cluster"
   hosts: consul_instances
   roles:
