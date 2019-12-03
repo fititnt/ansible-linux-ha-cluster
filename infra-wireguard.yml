@@ -1,0 +1,14 @@
+---
+# FILE:            infra-wireguard.yml
+# LICENSE:         Public Domain
+
+
+# ansible-playbook -i hosts.yml infra-wireguard.yml
+
+
+# We will use https://github.com/githubixx/ansible-role-wireguard to setup an Redis cluster
+
+- name: "alb-ha-cluster-infra + githubixx.ansible_role_wireguard: wireguard private networking"
+  hosts: vpn_nodes
+  roles:
+    - githubixx.ansible_role_wireguard

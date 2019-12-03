@@ -10,10 +10,14 @@
 - src: https://github.com/fititnt/ap-application-load-balancer
   name: ap-application-load-balancer
   # version: master
-  version: "v0.8.0-alpha"
+  version: "v0.8.1-alpha"
 
 # from galaxy
 - src: brianshumate.consul
+
+# from galaxy ansible-galaxy install githubixx.ansible_role_wireguard
+- src: githubixx.ansible_role_wireguard
+  # Tested with v4.1.1
 
 # from galaxy
 - src: davidwittman.redis
