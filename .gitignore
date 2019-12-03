@@ -2,3 +2,4 @@ extra-scripts/
 
 # Ignoring Ansible Ad-Hoc files from https://github.com/fititnt/ansible-ad-hoc 
 ad-hoc
+ad-hoc-alb
