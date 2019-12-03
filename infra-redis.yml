@@ -2,7 +2,6 @@
 # FILE:            infra-redis.yml
 # LICENSE:         Public Domain
 
-
 # ansible-playbook -i hosts.yml infra-redis.yml
 
 ## To hotfix error 'setup: [Errno 8] Exec format error: '/etc/ansible/facts.d/redis.fact'\n"'

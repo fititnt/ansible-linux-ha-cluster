@@ -1,5 +1,10 @@
-# ap-alb-cluster-demo
-**[working draft] Demo of [Águia Pescadora Application Load Balancer ("AP-ALB")](https://github.com/fititnt/ap-application-load-balancer) in a clusterized mode**
+# ansible-linux-ha-cluster
+**Ansible deployment of Linux HA (High Availability) cluster, PoC of AP-ALB.
+One non-Kubernetes / non-Pacemaker / non-DRBD / non-cloud-Lock-In way to do it
+even on cheapest VPSs you could find.**
+
+This is a Proof of Concept of [Águia Pescadora Application Load Balancer ("AP-ALB")](https://github.com/fititnt/ap-application-load-balancer)
+in a clusterized mode.
 
 For non-clusterized setup, check <https://github.com/fititnt/ap-alb-demo>.
 
@@ -25,15 +30,15 @@ Debug
 
 -->
 
-The **ap-alb-cluster-demo** does not have one ASCIInema demonstration... yet.
+The **ansible-linux-ha-cluster** does not have one ASCIInema demonstration... yet.
 The following is from [ap-alb-demo](https://github.com/fititnt/ap-alb-demo).
 
 [![asciicast](https://asciinema.org/a/281411.svg)](https://asciinema.org/a/281411)
 
-## How to download this ap-alb-demo to your machine
+## How to download this ansible-linux-ha-cluster to your machine
 
 ```bash
-git clone https://github.com/fititnt/ap-alb-cluster-demo.git .
+git clone https://github.com/fititnt/ansible-linux-ha-cluster.git .
 
 # This will download https://github.com/fititnt/https://github.com/fititnt/ap-application-load-balancer
 # on roles/ap-application-load-balancer
@@ -50,8 +55,8 @@ ansible-galaxy install -r requirements.yml --roles-path roles/
 vim hosts.yml
 
 # This will run the playbooks
-ansible-playbook -i hosts.yml main-alb-ha-cluster-infra.yml
-ansible-playbook -i hosts.yml main-alb-ha-cluster-apps.yml
+ansible-playbook -i hosts.yml main-infra.yml
+ansible-playbook -i hosts.yml main-apps.yml
 ```
 
 ### Ad Hoc ALB
@@ -62,14 +67,6 @@ ansible-playbook -i hosts.yml roles/ap-application-load-balancer/ad-hoc-alb/show
 
 # Tip: you may need replace 'roles/ap-application-load-balancer/' with something like '~/.ansible/roles/ap-application-load-balancer/'
 #      these ad-hoc-alb scripts are stored with the role
-```
-
-### Extra information
-
-```bash
-
-# To hotfix error 'setup: [Errno 8] Exec format error: '/etc/ansible/facts.d/redis.fact'\n"'
-ansible -i hosts.yml cluster_all_nodes -a "chmod -x /etc/ansible/facts.d/redis.fact"
 ```
 
 ## License

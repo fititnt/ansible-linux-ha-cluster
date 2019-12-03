@@ -1,0 +1,13 @@
+---
+# FILE:            main-infra.yml
+# LICENSE:         Public Domain
+
+# ansible-playbook -i hosts.yml main-infra.yml
+
+# The main-infra.yml import the other playbooks in the correct order. You can
+# run this this or each individual part alone.
+
+- import_playbook: infra-wireguard.yml
+- import_playbook: infra-consul.yml
+# - import_playbook: infra-redis.yml
+- import_playbook: infra-alb.yml
