@@ -2,16 +2,12 @@
 # FILE:            infra-alb.yml
 # LICENSE:         Public Domain
 
-
-# ansible-playbook -i hosts.yml infra-alb.yml
-# ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-haproxy"  # Apenas HAProxy
-# ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-openresty,alb-apps" --extra-vars "alb_forceredeploy=yes"
-# ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-ufw" --extra-vars "alb_forceredeploy=yes" # Apenas UFW
-
-# To do some basic check for see if redis is listening, is possible to use
-#    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-delta.etica.ai 6379
-#    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-echo.etica.ai 6379
-#    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-foxtrot.etica.ai 6379
+# To run this playbook alone, use:
+#     ansible-playbook -i hosts.yml infra-alb.yml
+# To force ignore cached facts, use
+#     ansible-playbook -i hosts.yml infra-alb.yml --extra-vars "alb_forceredeploy=yes"
+# To run only one subcomponent and skipping facts, use the --tags=. For HAproxy:
+#     ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-haproxy" --extra-vars "alb_forceredeploy=yes"
 
 - name: "ansible-linux-ha-cluster: Playbook to manange the cluster underline infrastructure (not the apps)"
   hosts: cluster_all_nodes

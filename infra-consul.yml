@@ -2,91 +2,16 @@
 # FILE:            infra-consul.yml
 # LICENSE:         Public Domain
 
+# To run this playbook alone, use:
+#     ansible-playbook -i hosts.yml infra-consul.yml
 
-# ansible-playbook -i hosts.yml infra-consul.yml
-
-# To access the Consul UI localy, can setup an SSH Tunnel (on your local host) and then open http://localhost:8500
-# ssh -R 8500:localhost:8500 root@aguia-pescadora-delta.etica.ai -N
-
-# In one run, after intentional node fail tesr (I deleted Delta and started from zero)
-# the consul from delta did not recover without intervention, and had do execute
-#    root@aguia-pescadora-delta:# rm /var/consul/serf/local.keyring
-# @see https://github.com/hashicorp/consul/issues/719#issuecomment-520129203
-# @see https://github.com/solarkennedy/puppet-consul/issues/256
-# @see https://github.com/hashicorp/consul/issues/719
-# @see https://www.consul.io/docs/commands/keyring.html
+# About the Ansible Role provider
+#   - https://github.com/brianshumate/ansible-consul
+# About Consul
+#   - https://www.consul.io
+#   - https://www.consul.io/docs/index.html
 
 - name: "ansible-linux-ha-cluster + brianshumate.consul: setup consul cluster"
   hosts: consul_instances
   roles:
     - brianshumate.consul
-
-## Initial state: 
-# - aguia-pescadora-echo: MASTER
-# - aguia-pescadora-foxtrot: SERVER
-# - aguia-pescadora-delta: FAILED
-
-#$ ansible all -a "cat /var/consul/serf/local.keyring"
-#aguia-pescadora-delta.etica.ai | CHANGED | rc=0 >>
-#["0Ywo8MG0Cdu2MHKbH0DTLO1iOa1MRhGemXf246NPVD0="]
-#
-#aguia-pescadora-echo.etica.ai | CHANGED | rc=0 >>
-#["0Ywo8MG0Cdu2MHKbH0DTLO1iOa1MRhGemXf246NPVD0="]
-#
-#aguia-pescadora-foxtrot.etica.ai | CHANGED | rc=0 >>
-#["0Ywo8MG0Cdu2MHKbH0DTLO1iOa1MRhGemXf246NPVD0="]
-
-# $ ansible all -a "consul keyring -list"              
-# aguia-pescadora-delta.etica.ai | CHANGED | rc=0 >>
-# ==> Gathering installed encryption keys...
-# WAN:
-#   0Ywo8MG0Cdu2MHKbH0DTLO1iOa1MRhGemXf246NPVD0= [1/1]
-# dc-germany (LAN):
-#   0Ywo8MG0Cdu2MHKbH0DTLO1iOa1MRhGemXf246NPVD0= [1/1]
-# aguia-pescadora-echo.etica.ai | CHANGED | rc=0 >>
-# ==> Gathering installed encryption keys...
-# WAN:
-#   XjDjtEywI3QOwIfDjGksG21f0fbhXRL+hT/daevcba0= [2/2]
-# dc-germany (LAN):
-#   XjDjtEywI3QOwIfDjGksG21f0fbhXRL+hT/daevcba0= [2/2]
-# aguia-pescadora-foxtrot.etica.ai | CHANGED | rc=0 >>
-# ==> Gathering installed encryption keys...
-# WAN:
-#   XjDjtEywI3QOwIfDjGksG21f0fbhXRL+hT/daevcba0= [2/2]
-#
-# dc-germany (LAN):
-#
-#
-# root@aguia-pescadora-delta:/var/consul/serf# consul join 167.86.127.220
-# Error joining address '167.86.127.220': Unexpected response code: 500 (1 error occurred:
-#	* Failed to join 167.86.127.220: No installed keys could decrypt the message
-#
-#)
-#Failed to join any nodes.
-#
-## ACTION 1
-# Copied /var/consul/serf/local.keyring from Echo (MASTER) to other nodes
-#    ansible-playbook roles/ap-application-load-balancer/ad-hoc-alb/distribute-file.yml -i apd.etica.ai,ape.etica.ai -e "donor=ape.etica.ai path=/var/consul/serf/local.keyring"
-## ACTION 2
-# Reload consul on all nodes
-#    systemctl reload consul
-# Result:
-# NO CHANGE:
-# - aguia-pescadora-echo: MASTER
-# - aguia-pescadora-foxtrot: SERVER
-# - aguia-pescadora-delta: FAILED
-## ACTION 3:
-# root@echo (the master): and issued one RESTART (not a reload)
-# Result: ECHO failed state, only echo is active, and is MASTER
-# - aguia-pescadora-echo: MASTER
-# - aguia-pescadora-foxtrot: FAILED
-# - aguia-pescadora-delta: FAILED
-## ACTIOn 4:
-# Restarted the last and operational node, ECHO (Note: all servers have same /var/consul/serf/local.keyring)
-# Result:
-# Full operationa cluster again
-# - aguia-pescadora-delta: SERVER
-# - aguia-pescadora-echo: MASTER
-# - aguia-pescadora-foxtrot: SERVER
-#
-# So, reload is not suficient, needs RESTART (No, did not need to do a full boostrap again, like would be with MariaDB/Galera)
