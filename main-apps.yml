@@ -8,7 +8,7 @@
 # To remove ALL deployed files on all hosts (they will need to be recreated before OpenResty restart next time!)
 # ansible -i hosts.yml cluster_all_nodes -a "rm -f /opt/alb/apps/*"
 
-- name: "alb-ha-cluster-infra: Playbook to manange the apps of already configured cluster"
+- name: "ansible-linux-ha-cluster: Playbook to manange the apps of already configured cluster"
   hosts: cluster_all_nodes
   # hosts: delta
   remote_user: root

@@ -2,13 +2,27 @@
 # FILE:            infra-wireguard.yml
 # LICENSE:         Public Domain
 
+# To run this playbook alone, use:
+#     ansible-playbook -i hosts.yml infra-wireguard.yml
 
-# ansible-playbook -i hosts.yml infra-wireguard.yml
+# About the Ansible Role provider
+#   - https://github.com/githubixx/ansible-role-wireguard
+# About Wireguard
+#   - https://www.wireguard.com/
+#   - https://github.com/pirate/wireguard-docs
 
-
-# We will use https://github.com/githubixx/ansible-role-wireguard to setup an Redis cluster
-
-- name: "alb-ha-cluster-infra + githubixx.ansible_role_wireguard: wireguard private networking"
+- name: "ansible-linux-ha-cluster + githubixx.ansible_role_wireguard: wireguard private networking"
   hosts: vpn_nodes
   roles:
     - githubixx.ansible_role_wireguard
+
+  tasks:
+    # https://github.com/githubixx/ansible-role-wireguard requires some ajusts on sysctl
+    - name: "Infra Wireguard | sysctl recommended setings"
+      sysctl:
+        name: "{{ item.key }}"
+        value: "{{ item.value }}"
+        sysctl_set: yes
+      with_items:
+        - key: "net.ipv4.ip_forward"
+          value: 1

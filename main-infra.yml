@@ -9,5 +9,4 @@
 
 - import_playbook: infra-wireguard.yml
 - import_playbook: infra-consul.yml
-# - import_playbook: infra-redis.yml
 - import_playbook: infra-alb.yml

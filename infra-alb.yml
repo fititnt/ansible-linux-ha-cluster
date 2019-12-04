@@ -13,7 +13,7 @@
 #    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-echo.etica.ai 6379
 #    (printf "PING\r\n"; sleep 1) | nc aguia-pescadora-foxtrot.etica.ai 6379
 
-- name: "alb-ha-cluster-infra: Playbook to manange the cluster underline infrastructure (not the apps)"
+- name: "ansible-linux-ha-cluster: Playbook to manange the cluster underline infrastructure (not the apps)"
   hosts: cluster_all_nodes
   # hosts: delta
   remote_user: root

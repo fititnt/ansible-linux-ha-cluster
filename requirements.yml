@@ -18,6 +18,3 @@
 # from galaxy ansible-galaxy install githubixx.ansible_role_wireguard
 - src: githubixx.ansible_role_wireguard
   # Tested with v4.1.1
-
-# from galaxy
-- src: davidwittman.redis

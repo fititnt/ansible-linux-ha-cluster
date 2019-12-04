@@ -49,7 +49,7 @@ The following is from [ap-alb-demo](https://github.com/fititnt/ap-alb-demo).
         - [But can I use only 2 nodes?](#but-can-i-use-only-2-nodes)
     - [Hardware of the cluster nodes](#hardware-of-the-cluster-nodes)
     - [The internet between the nodes](#the-internet-between-the-nodes)
-        - [Did I need an IPv4?](#did-i-need-an-ipv4)
+        - [Did I need an dedicated IPv4? Does this work on NATed IPv4?](#did-i-need-an-dedicated-ipv4-does-this-work-on-nated-ipv4)
     - [Operatinal System of the cluster nodes](#operatinal-system-of-the-cluster-nodes)
 - [License](#license)
 
@@ -174,8 +174,8 @@ the space of operational system:
   - Wireguard is CPU friendly
     - Even using 256-bit ChaCha20 still at least as fast as IPsec (ChaPoly)
 - **192 MB RAM**
-  - But then please add some SWAP. This is not kubernetes that complain about
-    Swap.
+  - But then please add some SWAP.
+    - Don't worry, this is not kubernetes that complain about Swap.
 - **8 GB disk space**
   - Maybe 5 GB if you try harder
 
@@ -190,8 +190,8 @@ components could work fine with different datacenters on same continent but
 with lower ping). If ping is higher, you may have to ajust some settings, or
 accept that some tasks could be slow.
 
-#### Did I need an IPv4?
-No. Not tested, but you could just use IPv6 and NATed IPv4.
+#### Did I need an dedicated IPv4? Does this work on NATed IPv4?
+No. Not tested, but you could just use IPv6.
 
 For who think this comment is strange, the cheapests VPSs from places like
 <https://www.serverhunter.com/> are paid by year and does not have IPv4.

@@ -16,7 +16,7 @@
 # @see https://github.com/hashicorp/consul/issues/719
 # @see https://www.consul.io/docs/commands/keyring.html
 
-- name: "alb-ha-cluster-infra + brianshumate.consul: setup consul cluster"
+- name: "ansible-linux-ha-cluster + brianshumate.consul: setup consul cluster"
   hosts: consul_instances
   roles:
     - brianshumate.consul
