@@ -1,6 +1,6 @@
 # ansible-linux-ha-cluster
 **Ansible deployment of Linux HA (High Availability) cluster, PoC of AP-ALB.
-One non-Kubernetes / non-Pacemaker / non-DRBD / non-cloud-Lock-In way to do it
+One non-Kubernetes, non-Pacemaker, non-DRBD, without-cloud-lock-ln way to do it
 even on cheapest VPSs you could find.** This is a Proof of Concept of
 [Águia Pescadora Application Load Balancer ("AP-ALB")](https://github.com/fititnt/ap-application-load-balancer)
 in a clusterized mode.
@@ -45,7 +45,11 @@ The following is from [ap-alb-demo](https://github.com/fititnt/ap-alb-demo).
     - [Responsibilities of the Ansible Roles](#responsibilities-of-the-ansible-roles)
 - [Requisites](#requisites)
     - [Ansible](#ansible)
+    - [Number of nodes](#number-of-nodes)
+        - [But can I use only 2 nodes?](#but-can-i-use-only-2-nodes)
     - [Hardware of the cluster nodes](#hardware-of-the-cluster-nodes)
+    - [The internet between the nodes](#the-internet-between-the-nodes)
+        - [Did I need an IPv4?](#did-i-need-an-ipv4)
     - [Operatinal System of the cluster nodes](#operatinal-system-of-the-cluster-nodes)
 - [License](#license)
 
@@ -139,18 +143,58 @@ computer and NOT the server where you want to install ALB**. One way to explain
 Ansible would be _it converts YAML variables + tasks on commands to execute
 (more often) on remote hosts that can be accessed over SSH_.
 
+### Number of nodes
+
+Rule of thumb: **3 (three) nodes**. Have a odd number (1, 3, 5, max 7) is
+important for your HA cluster decide alone what to do without humam
+intervention and without [risk of brain-split](https://en.wikipedia.org/wiki/Split-brain_(computing)).
+
+Note that obviously is possible to have more than 3 nodes (or even number of
+nodes) and this rule is for services that act like master (with power of
+decision), not just as followers.
+
+#### But can I use only 2 nodes?
+2 nodes, without any human intervention (or _cheating_ using using a 3rd machine
+to decide who is right) is likely to have lower
+[nines of availability](https://en.wikipedia.org/wiki/High_availability#"Nines")
+than simply have one server and don't turn off.
+
+It does not means that a cluster would not work with only 2 nodes. But without
+one odd number, if the connection between the nodes stop, or one node crash
+hard without say goodbye (like when you would do a soft reboot) the other node
+could enter in read-only mode.
+
 ### Hardware of the cluster nodes
 This is the **bare minimum** on each node considering alreading considering
 the space of operational system:
 
 - **1 vCPU**
-  - Consul is already using concervative heath checks to reduce CPU usage, so
-    it could run fine on Amazon T Nano instances
+  - Consul is already using concervative heath checks to reduce CPU usage,
+    so it could run fine on Amazon T Nano instances
+  - Wireguard is CPU friendly
+    - Even using 256-bit ChaCha20 still at least as fast as IPsec (ChaPoly)
 - **192 MB RAM**
   - But then please add some SWAP. This is not kubernetes that complain about
     Swap.
 - **8 GB disk space**
   - Maybe 5 GB if you try harder
+
+### The internet between the nodes
+**Direct access**. The ideal scenario, each node can access the other node
+directly. If this is not the case, you could look at "mesh networking"
+implementations.
+
+**Lower ping is better than huge speeds**. Another ideal scenario is each
+cluster have it's nodes not too far away (idealy same datacenter, but some HA
+components could work fine with different datacenters on same continent but
+with lower ping). If ping is higher, you may have to ajust some settings, or
+accept that some tasks could be slow.
+
+#### Did I need an IPv4?
+No. Not tested, but you could just use IPv6 and NATed IPv4.
+
+For who think this comment is strange, the cheapests VPSs from places like
+<https://www.serverhunter.com/> are paid by year and does not have IPv4.
 
 ### Operatinal System of the cluster nodes
 The ansible-linux-ha-cluster is tested mainly on Debian based distros (Ubuntu
