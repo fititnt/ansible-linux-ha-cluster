@@ -4,6 +4,10 @@
 
 # ansible-playbook -i hosts.yml main-apps.yml --tags="alb-apps"
 # ansible-playbook -i hosts.yml main-apps.yml --tags="alb-apps" --extra-vars "alb_forceredeploy=yes"
+# ansible-playbook -i hosts.yml main-apps.yml --tags="alb-apps" --extra-vars "alb_forceredeploy=yes alb_run_only_app_uid=hello-world-minimal"
+
+# To run only one app_use
+#    ansible-playbook --tags="alb-apps" --extra-vars "alb_forceredeploy=yes " -i hosts my_playbook.yml
 
 # To remove ALL deployed files on all hosts (they will need to be recreated before OpenResty restart next time!)
 # ansible -i hosts.yml cluster_all_nodes -a "rm -f /opt/alb/apps/*"

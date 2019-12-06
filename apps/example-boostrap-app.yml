@@ -1,0 +1,3 @@
+---
+#    ansible-playbook ad-hoc/test/install-mariadb.yml -i hosts.yml
+#    ansible-playbook ad-hoc/test/install-mariadb.yml -i hosts --extra-vars="mariadb_root_password=PassWord"#

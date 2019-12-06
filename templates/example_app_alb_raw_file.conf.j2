@@ -1,0 +1,17 @@
+# File: github.com/fititnt/ansible-linux-ha-cluster/templates/example_app_alb_raw_file.conf.j2
+# This file is just one example of using app_alb_raw_file instead of
+# app_alb_raw template string
+
+# With app_alb_raw you can't use item.app_uid variable, for example, but here
+# you can
+
+location /2 {
+    content_by_lua_block {
+       local cjson = require "cjson"
+       ngx.status = ngx.HTTP_OK
+       ngx.say(cjson.encode({
+           msg = "Hello, {{ item.app_uid }}! (from app_alb_raw_file)",
+           status = 200
+       }))
+    }
+}

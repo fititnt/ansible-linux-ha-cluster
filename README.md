@@ -45,6 +45,7 @@ The following is from [ap-alb-demo](https://github.com/fititnt/ap-alb-demo).
     - [Responsibilities of the Ansible Roles](#responsibilities-of-the-ansible-roles)
 - [Requisites](#requisites)
     - [Ansible](#ansible)
+    - [Python on target hosts](#python-on-target-hosts)
     - [Number of nodes](#number-of-nodes)
         - [But can I use only 2 nodes?](#but-can-i-use-only-2-nodes)
     - [Hardware of the cluster nodes](#hardware-of-the-cluster-nodes)
@@ -142,6 +143,28 @@ Check this [Windows Frequently Asked Questions](https://docs.ansible.com/ansible
 computer and NOT the server where you want to install ALB**. One way to explain
 Ansible would be _it converts YAML variables + tasks on commands to execute
 (more often) on remote hosts that can be accessed over SSH_.
+
+### Python on target hosts
+
+> You can skip this section if you did not get error like _"The module failed
+> to execute correctly, you probably need to set the interpreter"_
+
+The only requisite (beyond be able to SSH into a target host) that Ansible
+requires is some version of Python. This is fine with most Linux distributions,
+except in special CentOS 8 that decided not enforce one default python version
+so was up to the user choose one.
+
+```bash
+
+## For CentOS 8
+# Python 3, command to run if you are logged on each target host
+sudo dnf install python3 -y
+
+# Python 3, if can SSH into each host, but run an Ad-Hoc command that will
+# install Python for you
+ansible all -m raw -a "sudo dnf install python3 -y" -i apd.etica.ai,ape.etica.ai,apf.etica.ai,apg.etica.ai
+
+```
 
 ### Number of nodes
 

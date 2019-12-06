@@ -17,8 +17,8 @@
 #     ansible all -i hosts.yml -m shell -a "sudo rm -f /etc/ansible/facts.d/*"
 
 - name: "ansible-linux-ha-cluster: Playbook to manange the cluster underline infrastructure (not the apps)"
-  hosts: cluster_all_nodes
-  # hosts: delta
+  # hosts: cluster_all_nodes
+  hosts: ap_delta
   remote_user: root
   vars:
     # On this ap-alb-cluster-demo, we will use as example a single YAML file

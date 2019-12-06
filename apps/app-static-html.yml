@@ -1,0 +1,19 @@
+---
+#    ansible-playbook ad-hoc/test/install-mariadb.yml -i hosts.yml
+#    ansible-playbook ad-hoc/test/install-mariadb.yml -i hosts --extra-vars="mariadb_root_password=PassWord"#
+
+- name: "ansible-ad-hoc | app-static-html.yml"
+  hosts: all
+  # gather_facts: no
+
+  vars_prompt:
+    - name: agree
+      prompt: "DID YOU REALLY WANT APPLY test/install-redis.yml: TO {{ ansible_play_hosts }}? (yes)"
+      private: no
+      default: "no"
+    # The variable force=yes is required if we detect service seems to already be installed on past. But we will warn
+    # user only if we detect#
+    #- name: force
+    #  prompt: "Force if already running?"
+    #  private: no
+    #  default: "no"
