@@ -1,0 +1,24 @@
+---
+# FILE:            bootstrap.yml
+# LICENSE:         Public Domain
+
+# To run this playbook alone, use:
+#     ansible-playbook -i hosts.yml bootstrap.yml
+#     ansible-playbook -i hosts.yml bootstrap.yml -tags="alb-bootstrap"
+#     ansible-playbook -i apf.etica.ai, bootstrap.yml -tags="alb-bootstrap"
+#     ansible-playbook -i apf.etica.ai, bootstrap.yml --tags="alb-bootstrap" --flush-cache
+
+- name: "ansible-linux-ha-cluster: bootstrap.yml"
+  # hosts: cluster_all_nodes
+  hosts: all
+  remote_user: root
+  gather_facts: false
+  vars:
+    # On this ap-alb-cluster-demo, we will use as example a single YAML file
+    # containing all variables at /hosts.yml
+    #
+    # Note that ansible allows other types of inventories
+    alb_boostrap_caninstallpython: yes
+
+  roles:
+    - ap-application-load-balancer

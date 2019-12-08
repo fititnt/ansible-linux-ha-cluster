@@ -8,6 +8,8 @@
 #     ansible-playbook -i hosts.yml infra-alb.yml --extra-vars "alb_forceredeploy=yes"
 # To run only one subcomponent and skipping facts, use the --tags=. For HAproxy:
 #     ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-haproxy" --extra-vars "alb_forceredeploy=yes"
+# To just run the boostrap part
+#     ansible-playbook infra-alb.yml --tags="alb-bootstrap" -i apd.etica.ai,
 
 # To delete deployed apps and sysapps (for later rebuild from scrath)
 #     ansible all -i hosts.yml -m shell -a "sudo rm -f /opt/alb/sysapps/*"
@@ -17,9 +19,12 @@
 #     ansible all -i hosts.yml -m shell -a "sudo rm -f /etc/ansible/facts.d/*"
 
 - name: "ansible-linux-ha-cluster: Playbook to manange the cluster underline infrastructure (not the apps)"
-  # hosts: cluster_all_nodes
-  hosts: ap_delta
+  hosts: all
+  # hosts: ap_delta
+  # hosts: ap_echo
+  # hosts: ap_foxtrot
   remote_user: root
+  gather_facts: true
   vars:
     # On this ap-alb-cluster-demo, we will use as example a single YAML file
     # containing all variables at /hosts.yml
