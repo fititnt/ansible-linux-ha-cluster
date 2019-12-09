@@ -19,7 +19,7 @@
 #     ansible all -i hosts.yml -m shell -a "sudo rm -f /etc/ansible/facts.d/*"
 
 - name: "ansible-linux-ha-cluster: Playbook to manange the cluster underline infrastructure (not the apps)"
-  hosts: all
+  hosts: cross_platform_test
   # hosts: ap_delta
   # hosts: ap_echo
   # hosts: ap_foxtrot
