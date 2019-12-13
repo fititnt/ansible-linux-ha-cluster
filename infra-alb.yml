@@ -8,6 +8,8 @@
 #     ansible-playbook -i hosts.yml infra-alb.yml --extra-vars "alb_forceredeploy=yes"
 # To run only one subcomponent and skipping facts, use the --tags=. For HAproxy:
 #     ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-haproxy" --extra-vars "alb_forceredeploy=yes"
+# To run jump only for the status (may require minimal boostraped node), use:
+#     ansible-playbook -i hosts.yml infra-alb.yml --tags="alb-status"
 # To just run the boostrap part
 #     ansible-playbook infra-alb.yml --tags="alb-bootstrap" -i apd.etica.ai,
 
@@ -17,6 +19,8 @@
 
 # To delete cached facts
 #     ansible all -i hosts.yml -m shell -a "sudo rm -f /etc/ansible/facts.d/*"
+# FreeBSD things
+#     ansible rocha_anortosito_freebsd12 -i hosts.yml -m shell -u root -a "rm -f /etc/ansible/facts.d/alb_openresty.fact"
 
 - name: "ansible-linux-ha-cluster: Playbook to manange the cluster underline infrastructure (not the apps)"
   hosts: cross_platform_test
@@ -25,6 +29,7 @@
   # hosts: ap_foxtrot
   remote_user: root
   gather_facts: true
+  debugger: on_failed
   vars:
     # On this ap-alb-cluster-demo, we will use as example a single YAML file
     # containing all variables at /hosts.yml
@@ -33,3 +38,9 @@
 
   roles:
     - ap-application-load-balancer
+
+
+# Debuguer
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_debugger.html#using-the-debugger-keyword
+# p result._result
+# p task.args

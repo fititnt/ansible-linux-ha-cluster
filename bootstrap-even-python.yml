@@ -1,0 +1,27 @@
+---
+# FILE:            bootstrap-even-python.yml
+# LICENSE:         Public Domain
+#
+# DESCRIPTION:     This is one way to use the AP-ALB to install Python with
+#                  raw SSH commands. You do not need to leave
+#                  alb_boostrap_python on your playbooks
+
+# To run on all hosts from a playbook named "hosts.yml" on the current directory:
+#     ansible-playbook bootstrap-even-python.yml -i hosts.yml
+# To run on a IP or adress, without a hosts file (note the ',', thats important)
+#     ansible-playbook bootstrap-even-python.yml -i example.org,
+
+- name: "bootstrap-even-python.yml"
+  hosts: all
+  remote_user: root
+  gather_facts: false
+  vars:
+    # both and alb_boostrap_python="force" must be enabled to allow try install Python with raw SSH commands
+    alb_boostrap_python: "force"
+  roles:
+    - ap-application-load-balancer
+
+# Note: you actually can use ANY playbook that requires ap-application-load-balancer
+# but you set gather_facts: false on the playbook, to not leave this option enabled
+# just run with 
+#     ansible-playbook my-playbook-with-gather_facts-false.yml -i example.org, -e='alb_boostrap_python=force'
