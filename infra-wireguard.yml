@@ -13,6 +13,7 @@
 
 - name: "ansible-linux-ha-cluster + githubixx.ansible_role_wireguard: wireguard private networking"
   hosts: vpn_nodes
+  remote_user: root
   roles:
     - githubixx.ansible_role_wireguard
 

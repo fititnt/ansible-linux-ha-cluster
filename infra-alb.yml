@@ -23,7 +23,8 @@
 #     ansible rocha_anortosito_freebsd12 -i hosts.yml -m shell -u root -a "rm -f /etc/ansible/facts.d/alb_openresty.fact"
 
 - name: "ansible-linux-ha-cluster: Playbook to manange the cluster underline infrastructure (not the apps)"
-  hosts: cross_platform_test
+  # hosts: rocha_anortosito_centos8
+  hosts: cross_platform_test_2
   # hosts: ap_delta
   # hosts: ap_echo
   # hosts: ap_foxtrot

@@ -13,5 +13,6 @@
 
 - name: "ansible-linux-ha-cluster + brianshumate.consul: setup consul cluster"
   hosts: consul_instances
+  remote_user: root
   roles:
     - brianshumate.consul
