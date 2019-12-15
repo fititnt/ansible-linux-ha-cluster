@@ -1,11 +1,34 @@
 # ansible-linux-ha-cluster
 **Ansible deployment of Linux HA (High Availability) cluster, PoC of AP-ALB.
 One non-Kubernetes, non-Pacemaker, non-DRBD, without-cloud-lock-ln way to do it
-even on cheapest VPSs you could find.** This is a Proof of Concept of
-[Águia Pescadora Application Load Balancer ("AP-ALB")](https://github.com/fititnt/ap-application-load-balancer)
-in a clusterized mode.
+even on cheapest VPSs you could find.** This is a Proof of Concept of the
+reusable Ansible role [AP Application Load Balancer](https://ap-application-load-balancer.etica.ai/)
+and feature a **clusterized mode** and **cross-platform cluster** and also
+implements some extra, well maintained, Ansible Roles made by 3rd party.
+Check the [ASCIInema demo](#asciinema-demo).
 
-**ASCIInema demo**
+> **About using this playbooks in production**: At very minimum, you will need to
+customize the inventory (on this version, the [hosts.yml](hosts.yml)). But
+in special for who is new to Ansible and want reusability, consider the
+[fititnt/ansible-linux-ha-cluster](https://github.com/fititnt/ansible-linux-ha-cluster)
+with the following in mind:
+
+> - This is a playbooks colletion great quickstart on _how to glue_ some selected
+  reusable Ansible Roles on your own private projects.
+- Some versions of this repository may be used to test more extreme cases of
+  cross-platform cluster than you would like to have in production
+  - Example: while would be possible to implement a cross-platform Galera Cluster
+    for MariaDB/MySQL with true master-master replication using one node with
+    RHEL 7, another with OpenSUSE 15 and the last one with Debian 10, this may
+    require more work to debug from you.
+- Some playbooks, like the [infra-wireguard.yml](infra-wireguard.yml) are
+  intentionally separated both to be used alone and also to allow replacement.
+  - If you already have a VPN (via your cloud provider) or want some more
+    classic VPN solution, like IPSec, do it!
+
+## ASCIInema demo
+
+_TODO: stop to record a ASCIInema of the cross-platform cluster fully automated from scratch (fititnt, 2019-12-15 13:07)_.
 
 <!--
 Demo:
@@ -25,17 +48,18 @@ Debug
 
     ansible-playbook ad-hoc/info/show-ufw-status.yml -i hosts.yml
 
--->
-
 The **ansible-linux-ha-cluster** does not have one ASCIInema demonstration... yet.
 The following is from [ap-alb-demo](https://github.com/fititnt/ap-alb-demo).
 
 [![asciicast](https://asciinema.org/a/281411.svg)](https://asciinema.org/a/281411)
 
+-->
+
 ---
 
 <!-- TOC depthFrom:2 -->
 
+- [ASCIInema demo](#asciinema-demo)
 - [Usage](#usage)
     - [How to download this ansible-linux-ha-cluster to your machine](#how-to-download-this-ansible-linux-ha-cluster-to-your-machine)
     - [How to customize and use](#how-to-customize-and-use)

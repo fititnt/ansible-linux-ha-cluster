@@ -4,6 +4,9 @@
 
 # To run this playbook alone, use:
 #     ansible-playbook -i hosts.yml infra-alb.yml
+# To do some quick checks, use
+#     ansible cross_platform_test_2 -i hosts.yml -m raw -a "/opt/alb/bin/alb-cli-issues"
+#     ansible cross_platform_test_2 --user=root -i hosts.yml -m raw -a "/opt/alb/bin/alb-cli-issues"
 # To force ignore cached facts, use
 #     ansible-playbook -i hosts.yml infra-alb.yml --extra-vars "alb_forceredeploy=yes"
 # To run only one subcomponent and skipping facts, use the --tags=. For HAproxy:
