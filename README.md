@@ -8,58 +8,54 @@ implements some extra, well maintained, Ansible Roles made by 3rd party.
 Check the [ASCIInema demo](#asciinema-demo).
 
 > **About using this playbooks in production**: At very minimum, you will need to
-customize the inventory (on this version, the [hosts.yml](hosts.yml)). But
-in special for who is new to Ansible and want reusability, consider the
-[fititnt/ansible-linux-ha-cluster](https://github.com/fititnt/ansible-linux-ha-cluster)
-with the following in mind:
-
-> - This is a playbooks colletion great quickstart on _how to glue_ some selected
-  reusable Ansible Roles on your own private projects.
-- Some versions of this repository may be used to test more extreme cases of
-  cross-platform cluster than you would like to have in production
-  - Example: while would be possible to implement a cross-platform Galera Cluster
-    for MariaDB/MySQL with true master-master replication using one node with
-    RHEL 7, another with OpenSUSE 15 and the last one with Debian 10, this may
-    require more work to debug from you.
-- Some playbooks, like the [infra-wireguard.yml](infra-wireguard.yml) are
-  intentionally separated both to be used alone and also to allow replacement.
-  - If you already have a VPN (via your cloud provider) or want some more
-    classic VPN solution, like IPSec, do it!
+> customize the inventory (on this version, the [hosts.yml](hosts.yml)). But
+> in special for who is new to Ansible and want reusability, consider the
+> [fititnt/ansible-linux-ha-cluster](https://github.com/fititnt/ansible-linux-ha-cluster)
+> with the following in mind:
+>
+>- This is a playbooks colletion great quickstart on _how to glue_ some selected
+>  reusable Ansible Roles on your own private projects.
+>- While the ansible-linux-ha-cluster may demonstrate cross-platform clusters
+>  working together, using this on production may require some extra work than
+>  you would have if choose less underlining operational systems.
+>- Some playbooks, like the [infra-wireguard.yml](infra-wireguard.yml) are
+>  intentionally separated both to be used alone and also to allow replacement.
+>  If you already have a VPN (via your cloud provider) you may want to
+>  comment/remove this playbook. Enterprise users without one VPN may want some
+>  more classic VPN solution, like IPSec.
 
 ## ASCIInema demo
 
 _TODO: stop to record a ASCIInema of the cross-platform cluster fully automated from scratch (fititnt, 2019-12-15 13:07)_.
 
+[![asciicast](https://asciinema.org/a/288305.svg)](https://asciinema.org/a/288305)
+
+When reading the source codes or watching the ASCIInema demos, the
+sufix of hosts give a hint. So `rocha_basalto_freebsd12` means FreeBSD version
+12, `ap_foxtrot_debian10` means Debian 10, etc. For the role versions, check
+[requirements.yml](requirements.yml) file.
+
 <!--
 Demo:
 
-    asciinema rec ap-alb-demo-004 --idle-time-limit 5 --title "ap-alb-demo (AP-ALB v0.6.4-beta)"
+    asciinema rec ansible-linux-ha-cluster-001 --idle-time-limit 5 --title "ansible-linux-ha-cluster-001 (AP-ALB v0.8-5-alpha)"
 
-    cat hosts && sleep 4 && cat main.yml && sleep 4 && cat apps-server.yml && sleep 4 && cat db-server.yml && sleep 4 && cat group_vars/all.yml && sleep 6 && cat group_vars/apps_servers.yml && sleep 6 && cat group_vars/apps_servers.yml
+    cat main-infra.yml && sleep 4 && cat infra-wireguard.yml && sleep 4 && cat infra-consul.yml && sleep 4 && cat infra-alb.yml && sleep 4 && cat group_vars/all.yml && sleep 6 && cat hosts.yml
 
-    ansible-playbook -i hosts main.yml
+    ansible-playbook -i hosts.yml main-infra.yml
 
-
-Em caso de falha:
-    ansible-playbook -i hosts main.yml --start-at-task="ALB/UFW clusterfuck-pre-check.yml"
-    ansible-playbook -i hosts main.yml --start-at-task="Configure the kernel to keep connections alive when enabling the firewall"
-
-Debug
-
-    ansible-playbook ad-hoc/info/show-ufw-status.yml -i hosts.yml
-
-The **ansible-linux-ha-cluster** does not have one ASCIInema demonstration... yet.
-The following is from [ap-alb-demo](https://github.com/fititnt/ap-alb-demo).
-
-[![asciicast](https://asciinema.org/a/281411.svg)](https://asciinema.org/a/281411)
+    asciinema upload ansible-linux-ha-cluster-001
 
 -->
 
 ---
 
+## Table of Contents
+
 <!-- TOC depthFrom:2 -->
 
 - [ASCIInema demo](#asciinema-demo)
+- [Table of Contents](#table-of-contents)
 - [Usage](#usage)
     - [How to download this ansible-linux-ha-cluster to your machine](#how-to-download-this-ansible-linux-ha-cluster-to-your-machine)
     - [How to customize and use](#how-to-customize-and-use)
@@ -244,9 +240,26 @@ For who think this comment is strange, the cheapests VPSs from places like
 <https://www.serverhunter.com/> are paid by year and does not have IPv4.
 
 ### Operatinal System of the cluster nodes
-The ansible-linux-ha-cluster is tested mainly on Debian based distros (Ubuntu
-18.04 LTS). Some underline Roles already support other OSs. AP-ALB maybe will
-have support for RHEL/CentOS 8.
+The ansible-linux-ha-cluster was tested on several linux distributions and
+versions. For the role AP-ALB, some OSs may not implement all the features.
+Other roles made by 3rd party are not enabled when they did not support one OS.
+
+- **Operational System (full AP-ALB features)**:
+  - **Debian Family**
+    - Debian 10
+    - Ubuntu Server LTS 18.04
+  - **RedHat Family**
+    - CentOS 8, CentOS 7
+    - RHEL 8, RHEL 7
+- **Tested(require extra steps, like compiling OpenResty, to implement all AP-ALB features)**
+  - **Arch Linux**: _lastest_
+  - **BSD Family**: _FreeBSD 12_
+  - **SUSE Family**: _OpenSUSE 15_
+
+When reading the source codes or watching the ASCIInema demos, the
+sufix of hosts give a hint. So `rocha_basalto_freebsd12` means FreeBSD version
+12, `ap_foxtrot_debian10` means Debian 10, etc. For the role versions, check
+[requirements.yml](requirements.yml) file.
 
 ## License
 [![Public Domain](https://i.creativecommons.org/p/zero/1.0/88x31.png)](UNLICENSE)
