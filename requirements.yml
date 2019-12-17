@@ -9,7 +9,7 @@
 
 - src: https://github.com/fititnt/ap-application-load-balancer
   name: ap-application-load-balancer
-  version: "v0.8.5-alpha"
+  version: "v0.8.6-alpha"
 
 # from galaxy
 - src: brianshumate.consul

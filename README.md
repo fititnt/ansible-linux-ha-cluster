@@ -26,9 +26,9 @@ Check the [ASCIInema demo](#asciinema-demo).
 
 ## ASCIInema demo
 
-_TODO: stop to record a ASCIInema of the cross-platform cluster fully automated from scratch (fititnt, 2019-12-15 13:07)_.
+_TODO: fix last minute issue about luarocks path of lua-resty-auto-ssl on CentOS 7 (fititnt, 2019-12-17 20:34)_.
 
-[![asciicast](https://asciinema.org/a/288305.svg)](https://asciinema.org/a/288305)
+[![asciicast](https://asciinema.org/a/cstOUXeVk5RvxLegKAlLjIXTM.svg)](https://asciinema.org/a/cstOUXeVk5RvxLegKAlLjIXTM)
 
 When reading the source codes or watching the ASCIInema demos, the
 sufix of hosts give a hint. So `rocha_basalto_freebsd12` means FreeBSD version
@@ -38,13 +38,13 @@ sufix of hosts give a hint. So `rocha_basalto_freebsd12` means FreeBSD version
 <!--
 Demo:
 
-    asciinema rec ansible-linux-ha-cluster-001 --idle-time-limit 5 --title "ansible-linux-ha-cluster-001 (AP-ALB v0.8-5-alpha)"
+    asciinema rec ansible-linux-ha-cluster-002 --idle-time-limit 5 --title "ansible-linux-ha-cluster-002 (AP-ALB v0.8-6-alpha)"
 
-    cat main-infra.yml && sleep 4 && cat infra-wireguard.yml && sleep 4 && cat infra-consul.yml && sleep 4 && cat infra-alb.yml && sleep 4 && cat group_vars/all.yml && sleep 6 && cat hosts.yml
+    cat main-infra.yml && sleep 4 && cat infra-wireguard.yml && sleep 4 && cat infra-consul.yml && sleep 4 && cat infra-alb.yml && sleep 6 && cat hosts.yml
 
     ansible-playbook -i hosts.yml main-infra.yml
 
-    asciinema upload ansible-linux-ha-cluster-001
+    asciinema upload ansible-linux-ha-cluster-002
 
 -->
 
