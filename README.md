@@ -26,9 +26,13 @@ Check the [ASCIInema demo](#asciinema-demo).
 
 ## ASCIInema demo
 
-_TODO: fix last minute issue about luarocks path of lua-resty-auto-ssl on CentOS 7 (fititnt, 2019-12-17 20:34)_.
+[![asciicast](https://asciinema.org/a/TKWVLoK0tISoZF05Q7FYZ7CcQ.svg)](https://asciinema.org/a/TKWVLoK0tISoZF05Q7FYZ7CcQ)
 
-[![asciicast](https://asciinema.org/a/cstOUXeVk5RvxLegKAlLjIXTM.svg)](https://asciinema.org/a/cstOUXeVk5RvxLegKAlLjIXTM)
+> _TODO: fix AP-ALB 0.8.7-beta still requiring manual changes on CentOS 7 (fititnt, 2019-12-31 02:21)_.
+>
+> Note: on this play, the external role `githubixx.ansible_role_wireguard` used
+> on the cross-platform demo failed on Centos 8 (but weeks ago worked fine out
+> of the box)
 
 When reading the source codes or watching the ASCIInema demos, the
 sufix of hosts give a hint. So `rocha_basalto_freebsd12` means FreeBSD version
@@ -38,13 +42,15 @@ sufix of hosts give a hint. So `rocha_basalto_freebsd12` means FreeBSD version
 <!--
 Demo:
 
-    asciinema rec ansible-linux-ha-cluster-002 --idle-time-limit 5 --title "ansible-linux-ha-cluster-002 (AP-ALB v0.8-6-alpha)"
+    asciinema rec ansible-linux-ha-cluster-003~v0.8-7-beta --idle-time-limit 5 --title "ansible-linux-ha-cluster-003 (AP-ALB v0.8-7-beta)"
 
     cat main-infra.yml && sleep 4 && cat infra-wireguard.yml && sleep 4 && cat infra-consul.yml && sleep 4 && cat infra-alb.yml && sleep 6 && cat hosts.yml
 
     ansible-playbook -i hosts.yml main-infra.yml
 
-    asciinema upload ansible-linux-ha-cluster-002
+    py.test ad-hoc-alb-tests/test_alb-standard-node.py -p no:pytest-ansible --hosts='ansible://cross_platform_test_2?ansible_inventory=hosts.yml'
+
+    asciinema upload ansible-linux-ha-cluster-003~v0.8-7-beta
 
 -->
 
