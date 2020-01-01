@@ -7,9 +7,9 @@
 ## like /home/YOURUSERNAME/.ansible/roles/ap-application-load-balancer
 # ansible-galaxy install -r requirements.yml
 
-- src: https://github.com/fititnt/ap-application-load-balancer
-  name: ap-application-load-balancer
-  version: "v0.8.7-beta"
+#- src: https://github.com/fititnt/ap-application-load-balancer
+#  name: ap-application-load-balancer
+#s  version: "v0.8.7-beta"
 
 # from galaxy
 - src: brianshumate.consul
@@ -18,3 +18,36 @@
 # from galaxy ansible-galaxy install githubixx.ansible_role_wireguard
 - src: githubixx.ansible_role_wireguard
   # Tested with v4.1.1, 2019-11-11
+
+## MariaDB Galera Cluster roles
+# They seems to not be on Ansible Galaxy
+
+# Copy https://github.com/openstack/ansible-config_template/blob/master/action/config_template.py
+# to your Ansible actions, like e.g ~/.ansible/plugins/action/config_template.py
+
+# from https://github.com/openstack/ansible-config_template/releases/tag/1.0.0
+#- src: https://github.com/openstack/ansible-config_template
+#  name: "config_template"
+#  version: "1.0.0"
+#  # Tested with queens-em, 2019-11-14
+
+# from https://github.com/openstack/openstack-ansible-apt_package_pinning/releases/tag/queens-em
+- src: https://github.com/openstack/openstack-ansible-apt_package_pinning
+  name: "apt_package_pinning"
+  # version: "queens-em"
+  version: "master"
+  # Tested with queens-em, 2019-11-14
+
+# from https://github.com/openstack/openstack-ansible-galera_client/releases/tag/queens-em
+- src: https://github.com/openstack/openstack-ansible-galera_client
+  name: "galera_client"
+  # version: "queens-em"
+  version: "master"
+  # Tested with queens-em, 2019-11-14
+
+# from https://github.com/openstack/openstack-ansible-galera_server/releases/tag/queens-em
+- src: https://github.com/openstack/openstack-ansible-galera_server
+  name: "galera_server"
+  # version: "queens-em"
+  version: "master"
+  # Tested with queens-em, 2019-11-14

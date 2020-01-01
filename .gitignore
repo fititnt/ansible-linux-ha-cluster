@@ -4,3 +4,5 @@ extra-scripts/
 ad-hoc
 ad-hoc-alb
 ad-hoc-alb-tests
+
+.pytest_cache

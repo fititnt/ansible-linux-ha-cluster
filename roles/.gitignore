@@ -1,19 +1,22 @@
-# This project requires the role "ap-application-load-balancer" from 
+# This project requires the role "ap-application-load-balancer" from
 # https://github.com/fititnt/ap-application-load-balancer.
 #
 # Since this is not on Ansible Galaxy, you can manually download that project
 # on a folder here named "ap-application-load-balancer"
 #
-# Another alternative is downlaod that project for a different folder and
+# Another alternative is download that project for a different folder and
 # create a simbolic linc. This example was that Rocha used:
-#  
+#
 #   ln -s /alligo/code/fititnt/ap-application-load-balancer /alligo/code/fititnt/eticaai-data-warehouse/roles
 
 # The next lines ignore role "roles/ap-application-load-balancer"
 ap-application-load-balancer
-ap-application-load-balancer-submodule
-ap-application-load-balancer-symlink
-ap-application-load-balancer-extras
 
-# The alternative to symlink is adding as submodule
-#    git submodule add git@github.com:fititnt/ap-application-load-balancer.git ap-application-load-balancer
+## The next lines will ignore some other roles if you did not install on global
+# namespace but on the same folder
+brianshumate.consul
+githubixx.ansible_role_wireguard
+config_template
+apt_package_pinning
+galera_client
+galera_server
