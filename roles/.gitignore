@@ -11,6 +11,7 @@
 
 # The next lines ignore role "roles/ap-application-load-balancer"
 ap-application-load-balancer
+ap-application-load-balancer-extras
 
 ## The next lines will ignore some other roles if you did not install on global
 # namespace but on the same folder

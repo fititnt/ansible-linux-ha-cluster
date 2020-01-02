@@ -23,4 +23,4 @@
     # Note that ansible allows other types of inventories
 
   roles:
-    - ap-application-load-balancer
+    - ap-application-load-balancer-extras
