@@ -1,0 +1,59 @@
+---
+# FILE:            playbooks/apalbextras-only.yml
+# LICENSE:         Public Domain
+
+# To run this playbook alone, use:
+#     ansible-playbook -i hosts.yml playbooks/apalbextras-only.yml
+
+- name: "playbooks/apalbextras-only.yml: test fititnt.ap_application_load_balancer_extras without AP-ALB"
+  hosts: cross_platform_test_2
+  remote_user: root
+  debugger: on_failed
+  vars:
+    # see https://github.com/fititnt/ap-application-load-balancer-extras
+
+    albextras_hosts_etchosts:
+      - "127.0.0.1  site-a.local"
+      - "127.0.0.1  cdn.site-a.local"
+      - "127.0.0.1  site-b.local"
+      - "127.0.0.1  cdn.site-b.local"
+
+    albextras_groups:
+      - name: cdns
+
+    albextras_users:
+      - name: cdn-site-a
+        groups:
+          - cdns
+      - name: cdn-site-b
+        groups:
+          - cdns
+      - name: site-a
+      - name: php-demo
+
+    albextras_sample_content_static_sites:
+      - dest: /home/site-a/public_html
+        owner: site-a
+        group: site-a
+
+    albextras_sample_content_cdns:
+      - dest: /home/cdn-site-a/public_html
+        owner: cdn-site-a
+        group: cdns
+      - dest: /home/cdn-site-b/public_html
+        owner: cdn-site-b
+        group: cdns
+
+    albextras_sample_content_phps:
+      - dest: /home/php-demo/public_html
+        owner: php-demo
+
+    albextras_rclone: false
+    albextras_devel_nginx: true
+
+    ## If using devel-nginx AND running on containers without systemd
+    ## If using hosts and have have issues to write on /etc/hosts
+    # Set albextras_isconteiner: true to not make this role try enable a service
+    albextras_isconteiner: true
+  roles:
+    - fititnt.ap_application_load_balancer_extras
